@@ -10,8 +10,11 @@ public class BibliotecaApp {
     public static void main(String[] args) {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
         List<Book> Booklist = new ArrayList<Book>();
+        List<Movie> Movielist = new ArrayList<Movie>();
         Booklist.add(new Book("Chinese food","chenwenhao","2020",true));
         Booklist.add(new Book("Chinese KungFu","chenwenhao","2020",true));
+        Movielist.add(new Movie("One day in TWU","Joechen","2020",10,true));
+        Movielist.add(new Movie("other day in TWU","Joechen","2020",9,true));
         while(true){
             System.out.println("Here is our service menu! Please choose the function you want :)");
             System.out.println("1.show book list");
@@ -31,6 +34,12 @@ public class BibliotecaApp {
                     break;
                 case 3:
                     returnBook(Booklist);
+                    break;
+                case 4:
+                    showAllMovie(Movielist);
+                    break;
+                case 5:
+                    checkOutMovie(Movielist);
                     break;
                 default:
                     System.out.println("None service found! Please check again");
@@ -81,6 +90,35 @@ public class BibliotecaApp {
             }
         }
         System.out.println("That is not a valid book to return");
+    }
+
+    public static void showAllMovie(List<Movie> list){
+        //assume that we have list
+        System.out.println("there is the movie list:");
+        for(Movie a:list){
+            if(a.isAvailable())
+                a.showInfoOfMovie();
+        }
+    }
+
+    public static void checkOutMovie(List<Movie> list) {
+        System.out.println("Please enter name of movie:");
+        Scanner input = new Scanner(System.in);
+        String val = null;
+        val = input.nextLine();
+        for (Movie a : list) {
+            if (val.contains(a.checkMovieName())) {
+                if (a.isAvailable()) {
+                    System.out.println("Thank you! Enjoy the movie");
+                    a.changeAvailable(false);
+                    return;
+                } else {
+                    System.out.println("Sorry, that movie is not available");
+                    return;
+                }
+            }
+        }
+        System.out.println("Sorry, can not find this movie named:" + val);
     }
 
     public static int inputCheck(){
