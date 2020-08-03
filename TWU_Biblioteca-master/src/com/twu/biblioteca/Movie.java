@@ -39,4 +39,8 @@ public class Movie {
     public String checkMovieName(){
         return this.Name;
     }
+
+    public String getName() {
+        return Name;
+    }
 }

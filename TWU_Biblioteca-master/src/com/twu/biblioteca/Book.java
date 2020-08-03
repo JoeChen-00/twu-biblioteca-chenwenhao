@@ -37,4 +37,20 @@ public class Book {
     public String checkBookName(){
         return this.BookName;
     }
+
+    public String getAuthor() {
+        return Author;
+    }
+
+    public String getBookName() {
+        return BookName;
+    }
+
+    public String getHolder() {
+        return Holder;
+    }
+
+    public String getPublishedYear() {
+        return PublishedYear;
+    }
 }

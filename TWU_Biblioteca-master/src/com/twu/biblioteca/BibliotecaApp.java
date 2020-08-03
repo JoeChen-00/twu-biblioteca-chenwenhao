@@ -63,6 +63,9 @@ public class BibliotecaApp {
                 case 5:
                     checkOutMovie(Movielist,customer);
                     break;
+                case 6:
+                    returnMovie(Movielist);
+                    break;
                 default:
                     System.out.println("None service found! Please check again");
                     break;
@@ -141,6 +144,21 @@ public class BibliotecaApp {
             }
         }
         System.out.println("Sorry, can not find this movie named:" + val);
+    }
+
+    public static void returnMovie(List<Movie> list){
+        System.out.println("Please enter name of Movie:");
+        Scanner input = new Scanner(System.in);
+        String val = null;
+        val = input.nextLine();
+        for (Movie a : list) {
+            if (val.contains(a.checkMovieName())) {
+                System.out.println("Thank you for returning the Movie");
+                a.changeAvailable("Librarian",true);
+                return;
+            }
+        }
+        System.out.println("That is not a valid Movie to return");
     }
 
     public static int inputCheck(){
