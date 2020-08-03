@@ -12,7 +12,8 @@ public class BibliotecaApp {
         List<Book> Booklist = new ArrayList<Book>();
         List<Movie> Movielist = new ArrayList<Movie>();
         List<Customer> Customerlist = new ArrayList<Customer>();
-        Customerlist.add(new Customer("Joechen01","123456","chen","wenhao.chen@thoughtworks.com","15907130615"));
+        Customerlist.add(new Customer("Joe","123456","chen","wenhao.chen@thoughtworks.com","15907130615",true));
+        Customerlist.add(new Customer("Joechen01","123456","chen","wenhao.chen@thoughtworks.com","15907130615",false));
         Booklist.add(new Book("Chinese food","chenwenhao","2020","Librarian",true));
         Booklist.add(new Book("Chinese KungFu","chenwenhao","2020","Librarian",true));
         Movielist.add(new Movie("One day in TWU","Joechen","2020",10,"Librarian",true));
@@ -42,8 +43,12 @@ public class BibliotecaApp {
             System.out.println("1.show book list");
             System.out.println("2.check out book");
             System.out.println("3.return book");
+            System.out.println("4.show movie list");
+            System.out.println("5.check out movie");
+            System.out.println("6.return movie");
+            System.out.println("7.check borrow list(only for Librarian)");
             System.out.println("0.quit system");
-            System.out.println("Please enter instructions[0-3]! Press the Enter to continue...");
+            System.out.println("Please enter instructions[0-7]! Press the Enter to continue...");
             int menuchoose = inputCheck();
             if(menuchoose==0)
                 break;
@@ -66,9 +71,32 @@ public class BibliotecaApp {
                 case 6:
                     returnMovie(Movielist);
                     break;
+                case 7:
+                    if(customer.getIsRoot())
+                        showCheckOutList(Booklist,Movielist);
+                    else
+                        System.out.println("permission denied!");
+                    break;
                 default:
                     System.out.println("None service found! Please check again");
                     break;
+            }
+        }
+    }
+
+    public static void showCheckOutList(List<Book> Booklist,List<Movie> MovieList){
+        //assume that we have list
+        System.out.println("there is the borrow list:");
+        for(Book a:Booklist){
+            if(!a.isAvailable()){
+                a.showInfoOfBook();
+                a.showInfoOfHolder();
+            }
+        }
+        for(Movie a:MovieList){
+            if(!a.isAvailable()){
+                a.showInfoOfMovie();
+                a.showInfoOfHolder();
             }
         }
     }

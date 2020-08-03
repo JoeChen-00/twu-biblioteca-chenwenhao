@@ -27,6 +27,9 @@ public class Book {
         System.out.println("Author:"+this.Author);
         System.out.println("Published Year:"+this.PublishedYear);
     }
+    public void showInfoOfHolder(){
+        System.out.println("holder:"+this.Holder);
+    }
     public Boolean isAvailable(){
         return this.Available;
     }

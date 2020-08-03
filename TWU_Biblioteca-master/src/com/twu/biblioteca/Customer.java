@@ -6,13 +6,15 @@ public class Customer {
     private String Name;
     private String Email;
     private String PhoneNumber;
+    private boolean IsRoot;
 
-    Customer(String userName,String password,String name,String email,String phoneNumber){
+    Customer(String userName,String password,String name,String email,String phoneNumber,Boolean isRoot){
         this.UserName = userName;
         this.Password = password;
         this.Name = name;
         this.Email = email;
         this.PhoneNumber = phoneNumber;
+        this.IsRoot = isRoot;
     }
 
     public boolean signIn(String password) {
@@ -29,4 +31,5 @@ public class Customer {
     }
 
     public String getUserName(){return this.UserName;}
+    public boolean getIsRoot(){return this.IsRoot;}
 }

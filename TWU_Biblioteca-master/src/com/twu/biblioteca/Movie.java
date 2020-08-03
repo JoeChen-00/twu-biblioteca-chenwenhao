@@ -29,6 +29,9 @@ public class Movie {
         System.out.println("Published Year:"+this.PublishedYear);
         System.out.println("Movie Rating:"+this.Rating);
     }
+    public void showInfoOfHolder(){
+        System.out.println("holder:"+this.Holder);
+    }
     public Boolean isAvailable(){
         return this.Available;
     }
