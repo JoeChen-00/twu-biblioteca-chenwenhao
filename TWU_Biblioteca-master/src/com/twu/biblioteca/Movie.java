@@ -6,12 +6,14 @@ public class Movie {
     private String Name;
     private int Rating;
     private Boolean Available;
+    private String Holder;
     Movie(){}
-    Movie(String name,String director,String publishedYear,int rating,boolean available){
+    Movie(String name,String director,String publishedYear,int rating,String holder,boolean available){
         this.Name = name;
         this.Director = director;
         this.PublishedYear = publishedYear;
         this.Rating = rating;
+        this.Holder = holder;
         this.Available = available;
     }
     public void writeInfoOfMovie(String name,String director,String publishedYear,int rating,boolean available){
@@ -30,7 +32,8 @@ public class Movie {
     public Boolean isAvailable(){
         return this.Available;
     }
-    public void changeAvailable(Boolean available){
+    public void changeAvailable(String holder,Boolean available){
+        this.Holder = holder;
         this.Available = available;
     }
     public String checkMovieName(){

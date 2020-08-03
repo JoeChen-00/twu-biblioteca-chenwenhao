@@ -7,11 +7,13 @@ public class Book {
     private String PublishedYear;
     private String BookName;
     private Boolean Available;
-    Book(){}
-    Book(String name,String author,String publishedYear,boolean available){
+    private String Holder;
+
+    Book(String name,String author,String publishedYear,String holder,boolean available){
         this.BookName = name;
         this.Author = author;
         this.PublishedYear = publishedYear;
+        this.Holder = holder;
         this.Available = available;
     }
     public void writeInfoOfBook(String name,String author,String publishedYear,boolean available){
@@ -28,7 +30,8 @@ public class Book {
     public Boolean isAvailable(){
         return this.Available;
     }
-    public void changeAvailable(Boolean available){
+    public void changeAvailable(String holder,Boolean available){
+        this.Holder = holder;
         this.Available = available;
     }
     public String checkBookName(){

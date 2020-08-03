@@ -11,10 +11,32 @@ public class BibliotecaApp {
         System.out.println("Welcome to Biblioteca. Your one-stop-shop for great book titles in Bangalore!");
         List<Book> Booklist = new ArrayList<Book>();
         List<Movie> Movielist = new ArrayList<Movie>();
-        Booklist.add(new Book("Chinese food","chenwenhao","2020",true));
-        Booklist.add(new Book("Chinese KungFu","chenwenhao","2020",true));
-        Movielist.add(new Movie("One day in TWU","Joechen","2020",10,true));
-        Movielist.add(new Movie("other day in TWU","Joechen","2020",9,true));
+        List<Customer> Customerlist = new ArrayList<Customer>();
+        Customerlist.add(new Customer("Joechen01","123456","chen","wenhao.chen@thoughtworks.com","15907130615"));
+        Booklist.add(new Book("Chinese food","chenwenhao","2020","Librarian",true));
+        Booklist.add(new Book("Chinese KungFu","chenwenhao","2020","Librarian",true));
+        Movielist.add(new Movie("One day in TWU","Joechen","2020",10,"Librarian",true));
+        Movielist.add(new Movie("other day in TWU","Joechen","2020",9,"Librarian",true));
+        Customer customer = null;
+        while(true){
+            System.out.println("Username:");
+            Scanner input = new Scanner(System.in);
+            String Username = input.nextLine();
+            System.out.println("Password:");
+            String Password = input.nextLine();
+            for(Customer a:Customerlist){
+                if(a.getUserName().equals(Username)){
+                    customer = a;
+                    break;
+                }
+            }
+            if(customer==null)
+                System.out.println("User doesn't exist");
+            else if(customer.signIn(Password))
+                break;
+            else
+                System.out.println("Wrong password");
+        }
         while(true){
             System.out.println("Here is our service menu! Please choose the function you want :)");
             System.out.println("1.show book list");
@@ -30,7 +52,7 @@ public class BibliotecaApp {
                     showAllBook(Booklist);
                     break;
                 case 2:
-                    checkOutBook(Booklist);
+                    checkOutBook(Booklist,customer);
                     break;
                 case 3:
                     returnBook(Booklist);
@@ -39,7 +61,7 @@ public class BibliotecaApp {
                     showAllMovie(Movielist);
                     break;
                 case 5:
-                    checkOutMovie(Movielist);
+                    checkOutMovie(Movielist,customer);
                     break;
                 default:
                     System.out.println("None service found! Please check again");
@@ -57,7 +79,7 @@ public class BibliotecaApp {
         }
     }
 
-    public static void checkOutBook(List<Book> Booklist) {
+    public static void checkOutBook(List<Book> Booklist,Customer customer) {
         System.out.println("Please enter name of book:");
         Scanner input = new Scanner(System.in);
         String val = null;
@@ -66,7 +88,7 @@ public class BibliotecaApp {
             if (val.contains(a.checkBookName())) {
                 if (a.isAvailable()) {
                     System.out.println("Thank you! Enjoy the book");
-                    a.changeAvailable(false);
+                    a.changeAvailable(customer.getUserName(),false);
                     return;
                 } else {
                     System.out.println("Sorry, that book is not available");
@@ -85,7 +107,7 @@ public class BibliotecaApp {
         for (Book a : Booklist) {
             if (val.contains(a.checkBookName())) {
                 System.out.println("Thank you for returning the book");
-                a.changeAvailable(true);
+                a.changeAvailable("Librarian",true);
                 return;
             }
         }
@@ -101,7 +123,7 @@ public class BibliotecaApp {
         }
     }
 
-    public static void checkOutMovie(List<Movie> list) {
+    public static void checkOutMovie(List<Movie> list,Customer customer) {
         System.out.println("Please enter name of movie:");
         Scanner input = new Scanner(System.in);
         String val = null;
@@ -110,7 +132,7 @@ public class BibliotecaApp {
             if (val.contains(a.checkMovieName())) {
                 if (a.isAvailable()) {
                     System.out.println("Thank you! Enjoy the movie");
-                    a.changeAvailable(false);
+                    a.changeAvailable(customer.getUserName(),false);
                     return;
                 } else {
                     System.out.println("Sorry, that movie is not available");
